@@ -18,14 +18,17 @@ jobs:
       matrix:
         os: [windows-latest, macOS-latest]
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/build-steps
 
 
   container_build:
     name: Build in container ${{ matrix.container }}
     runs-on: ubuntu-latest
+    container: ${{ matrix.container }}
     strategy:
       matrix:
         container: [alpine:edge, ubuntu:latest]
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/build-steps
